@@ -1,11 +1,26 @@
+import { lazy, Suspense } from 'react';
 import { useState, useEffect } from 'react';
-import { NavLink, Link, useParams, Switch, Route } from 'react-router-dom';
+import {
+  NavLink,
+  Link,
+  useParams,
+  Switch,
+  Route,
+  useRouteMatch,
+} from 'react-router-dom';
 import imagesAPI from 'components/services/APIRequests';
-import Cast from './Cast';
-import Reviews from './Reviews';
 import styles from 'components/App.module.css';
+// import Cast from './Cast';
+// import Reviews from './Reviews';
+
+const Cast = lazy(() => import('./Cast.jsx' /* webpackChunkName: "Cast" */));
+
+const Reviews = lazy(() =>
+  import('./Reviews.jsx' /* webpackChunkName: "Reviews" */)
+);
 
 const MovieDetailsPage = () => {
+  const { url, path } = useRouteMatch();
   const { moviesId } = useParams();
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
@@ -13,9 +28,12 @@ const MovieDetailsPage = () => {
   const [posterLink, setPosterLink] = useState(
     'https://blankposter.com/wp-content/uploads/2021/11/Andrea_Busi_Wack-1-860x1204.jpg'
   );
+  const [unmount, setUnmount] = useState(false);
 
   useEffect(() => {
-    setStatus('pending');
+    if (unmount) {
+      return;
+    }
 
     imagesAPI
       .fetchFullMovieInfo(moviesId)
@@ -29,11 +47,14 @@ const MovieDetailsPage = () => {
         setError(error);
         setStatus('rejected');
       });
-  }, [moviesId]);
+
+    return () => {
+      setUnmount(true);
+    };
+  }, [moviesId, unmount]);
 
   return (
     <div>
-      {status === 'pending' && <h1>Pending...</h1>}
       {status === 'rejected' && <h1>{error.massage}</h1>}
       {status === 'resolved' && (
         <div>
@@ -51,32 +72,36 @@ const MovieDetailsPage = () => {
             <ul>
               <li>
                 <NavLink
+                  exact
                   className={styles.link}
                   activeClassName={styles.activeLink}
-                  to={`/movies/${moviesId}/casr`}
+                  to={`${url}/casr`}
                 >
                   Casr
                 </NavLink>
               </li>
               <li>
                 <NavLink
+                  exact
                   className={styles.link}
                   activeClassName={styles.activeLink}
-                  to={`/movies/${moviesId}/reviews`}
+                  to={`${url}/reviews`}
                 >
                   Reviews
                 </NavLink>
               </li>
             </ul>
             <hr />
-            <Switch>
-              <Route path="/movies/:moviesId/casr" exact>
-                <Cast />
-              </Route>
-              <Route path="/movies/:moviesId/reviews" exact>
-                <Reviews />
-              </Route>
-            </Switch>
+            <Suspense fallback={<h1>ЗАГРУЖАЕМ...</h1>}>
+              <Switch>
+                <Route path={`${path}/casr`} exact>
+                  <Cast />
+                </Route>
+                <Route path={`${path}/reviews`} exact>
+                  <Reviews />
+                </Route>
+              </Switch>
+            </Suspense>
           </div>
         </div>
       )}

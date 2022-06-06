@@ -13,8 +13,6 @@ const Cast = () => {
   const [unmount, setUnmount] = useState(false);
 
   useEffect(() => {
-    setStatus('pending');
-
     if (unmount) {
       return;
     }
@@ -37,7 +35,6 @@ const Cast = () => {
 
   return (
     <div>
-      {status === 'pending' && <h1>Pending...</h1>}
       {status === 'rejected' && <h1>{error.massage}</h1>}
       {status === 'resolved' && (
         <ul>

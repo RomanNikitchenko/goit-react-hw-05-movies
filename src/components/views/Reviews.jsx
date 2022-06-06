@@ -10,8 +10,6 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    setStatus('pending');
-
     if (unmount) {
       return;
     }
@@ -34,7 +32,6 @@ const Reviews = () => {
 
   return (
     <div>
-      {status === 'pending' && <h1>Pending...</h1>}
       {status === 'rejected' && <h1>{error.massage}</h1>}
       {status === 'resolved' && (
         <div>
