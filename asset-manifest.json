@@ -1,9 +1,9 @@
 {
   "files": {
     "main.css": "/goit-react-hw-05-movies/static/css/main.219ad7ad.css",
-    "main.js": "/goit-react-hw-05-movies/static/js/main.283925d4.js",
+    "main.js": "/goit-react-hw-05-movies/static/js/main.e7aceddf.js",
     "HomePage.js": "/goit-react-hw-05-movies/static/js/HomePage.827d3a6c.chunk.js",
-    "MoviesPage.js": "/goit-react-hw-05-movies/static/js/MoviesPage.f845e546.chunk.js",
+    "MoviesPage.js": "/goit-react-hw-05-movies/static/js/MoviesPage.7599451d.chunk.js",
     "MovieDetailsPage.css": "/goit-react-hw-05-movies/static/css/MovieDetailsPage.eae038bb.chunk.css",
     "MovieDetailsPage.js": "/goit-react-hw-05-movies/static/js/MovieDetailsPage.26d64568.chunk.js",
     "Cast.js": "/goit-react-hw-05-movies/static/js/Cast.82247741.chunk.js",
@@ -11,9 +11,9 @@
     "static/js/230.b4793a41.chunk.js": "/goit-react-hw-05-movies/static/js/230.b4793a41.chunk.js",
     "index.html": "/goit-react-hw-05-movies/index.html",
     "main.219ad7ad.css.map": "/goit-react-hw-05-movies/static/css/main.219ad7ad.css.map",
-    "main.283925d4.js.map": "/goit-react-hw-05-movies/static/js/main.283925d4.js.map",
+    "main.e7aceddf.js.map": "/goit-react-hw-05-movies/static/js/main.e7aceddf.js.map",
     "HomePage.827d3a6c.chunk.js.map": "/goit-react-hw-05-movies/static/js/HomePage.827d3a6c.chunk.js.map",
-    "MoviesPage.f845e546.chunk.js.map": "/goit-react-hw-05-movies/static/js/MoviesPage.f845e546.chunk.js.map",
+    "MoviesPage.7599451d.chunk.js.map": "/goit-react-hw-05-movies/static/js/MoviesPage.7599451d.chunk.js.map",
     "MovieDetailsPage.eae038bb.chunk.css.map": "/goit-react-hw-05-movies/static/css/MovieDetailsPage.eae038bb.chunk.css.map",
     "MovieDetailsPage.26d64568.chunk.js.map": "/goit-react-hw-05-movies/static/js/MovieDetailsPage.26d64568.chunk.js.map",
     "Cast.82247741.chunk.js.map": "/goit-react-hw-05-movies/static/js/Cast.82247741.chunk.js.map",
@@ -22,6 +22,6 @@
   },
   "entrypoints": [
     "static/css/main.219ad7ad.css",
-    "static/js/main.283925d4.js"
+    "static/js/main.e7aceddf.js"
   ]
 }
