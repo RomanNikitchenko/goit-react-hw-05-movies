@@ -5,6 +5,7 @@ import imagesAPI from 'components/services/APIRequests';
 const MoviesPage = () => {
   const { url } = useRouteMatch();
   const [moviesName, setMoviesName] = useState('');
+  const [page] = useState(1);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState(null);
@@ -31,7 +32,7 @@ const MoviesPage = () => {
     }
 
     imagesAPI
-      .fetchSearchByKeyword(moviesName)
+      .fetchSearchByKeyword(moviesName, page)
       .then(movies => {
         setMovies(movies.results);
         setStatus('resolved');
@@ -44,7 +45,7 @@ const MoviesPage = () => {
     return () => {
       setUnmount(true);
     };
-  }, [unmount, moviesName]);
+  }, [unmount, moviesName, page]);
 
   return (
     <div>

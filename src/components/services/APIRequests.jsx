@@ -2,7 +2,7 @@ import settings from './settings';
 
 const { BASE_URL, API_KEY } = settings;
 
-async function fetchSearchByKeyword(q, page = 1) {
+async function fetchSearchByKeyword(q, page) {
   const response = await fetch(
     `${BASE_URL}search/movie?api_key=${API_KEY}&query=${q}&page=${page}`
   );
