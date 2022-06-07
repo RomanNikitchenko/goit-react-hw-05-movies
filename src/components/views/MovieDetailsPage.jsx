@@ -1,8 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import {
   NavLink,
-  Link,
   useParams,
   Switch,
   Route,
@@ -10,8 +12,6 @@ import {
 } from 'react-router-dom';
 import imagesAPI from 'components/services/APIRequests';
 import styles from 'components/App.module.css';
-// import Cast from './Cast';
-// import Reviews from './Reviews';
 
 const Cast = lazy(() => import('./Cast.jsx' /* webpackChunkName: "Cast" */));
 
@@ -19,7 +19,8 @@ const Reviews = lazy(() =>
   import('./Reviews.jsx' /* webpackChunkName: "Reviews" */)
 );
 
-const MovieDetailsPage = () => {
+const MovieDetailsPage = ({ page }) => {
+  const history = useHistory();
   const { url, path } = useRouteMatch();
   const { moviesId } = useParams();
   const [error, setError] = useState(null);
@@ -60,8 +61,8 @@ const MovieDetailsPage = () => {
         <div>
           <hr />
           <div>
-            <button type="button">
-              <Link to="/">на главную</Link>
+            <button type="button" onClick={() => history.push(page)}>
+              Go back
             </button>
           </div>
           <hr />
@@ -107,6 +108,10 @@ const MovieDetailsPage = () => {
       )}
     </div>
   );
+};
+
+MovieDetailsPage.propTypes = {
+  page: PropTypes.string.isRequired,
 };
 
 export default MovieDetailsPage;

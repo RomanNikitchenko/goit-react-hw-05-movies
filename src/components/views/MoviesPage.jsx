@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
 import imagesAPI from 'components/services/APIRequests';
+import PropTypes from 'prop-types';
 
-const MoviesPage = () => {
+const MoviesPage = ({ GoBack }) => {
   const { url } = useRouteMatch();
+  const history = useHistory();
+  const location = useLocation();
   const [moviesName, setMoviesName] = useState('');
   const [page] = useState(1);
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
   const [movies, setMovies] = useState(null);
-  const [unmount, setUnmount] = useState(true);
 
   const handleNameChange = e => {
     setMoviesName(e.currentTarget.value.toLowerCase());
@@ -19,20 +21,31 @@ const MoviesPage = () => {
     e.preventDefault();
 
     if (moviesName.trim() === '') {
-      alert('введите имя изображения');
+      alert('введите имя фильма');
       return;
     }
 
-    setUnmount(false);
+    history.push({
+      ...location,
+      search: `query=${moviesName}`,
+    });
   };
 
   useEffect(() => {
-    if (unmount) {
+    if (location.search === '') {
       return;
     }
 
+    const getFromlocationSearch = new URLSearchParams(location.search).get(
+      'query'
+    );
+
+    setMoviesName(getFromlocationSearch);
+
+    GoBack(`${url}${location.search}`);
+
     imagesAPI
-      .fetchSearchByKeyword(moviesName, page)
+      .fetchSearchByKeyword(getFromlocationSearch, page)
       .then(movies => {
         setMovies(movies.results);
         setStatus('resolved');
@@ -41,18 +54,12 @@ const MoviesPage = () => {
         setError(error);
         setStatus('rejected');
       });
-
-    return () => {
-      setUnmount(true);
-    };
-  }, [unmount, moviesName, page]);
+  }, [history, location, page, GoBack, url]);
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <button type="submit">
-          <Link to={`${url}/${moviesName}`}>Найти</Link>
-        </button>
+        <button type="submit">найти</button>
 
         <input
           type="text"
@@ -75,6 +82,10 @@ const MoviesPage = () => {
       )}
     </div>
   );
+};
+
+MoviesPage.propTypes = {
+  GoBack: PropTypes.func.isRequired,
 };
 
 export default MoviesPage;

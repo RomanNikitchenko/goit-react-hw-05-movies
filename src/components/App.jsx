@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navigation from './Navigation/Navigation';
 // import HomePage from './views/HomePage';
@@ -20,6 +20,12 @@ const MovieDetailsPage = lazy(() =>
 );
 
 const App = () => {
+  const [page, setPage] = useState('/');
+
+  const handlChangeUrl = name => {
+    setPage(name);
+  };
+
   return (
     <div>
       <header>
@@ -29,19 +35,19 @@ const App = () => {
       <Suspense fallback={<h1>ЗАГРУЖАЕМ...</h1>}>
         <Switch>
           <Route path="/" exact>
-            <HomePage />
+            <HomePage GoBack={handlChangeUrl} />
           </Route>
 
           <Route path="/movies" exact>
-            <MoviesPage />
+            <MoviesPage GoBack={handlChangeUrl} />
           </Route>
 
           <Route path="/movies/:moviesId">
-            <MovieDetailsPage />
+            <MovieDetailsPage page={page} />
           </Route>
 
           <Route>
-            <HomePage />
+            <HomePage GoBack={handlChangeUrl} />
           </Route>
         </Switch>
       </Suspense>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import imagesAPI from 'components/services/APIRequests';
+import PropTypes from 'prop-types';
 
-const HomePage = () => {
+const HomePage = ({ GoBack }) => {
   const { url } = useRouteMatch();
   const [error, setError] = useState(null);
   const [status, setStatus] = useState(null);
@@ -13,6 +14,8 @@ const HomePage = () => {
     if (unmount) {
       return;
     }
+
+    GoBack(`${url}`);
 
     imagesAPI
       .fetchTrending()
@@ -28,7 +31,7 @@ const HomePage = () => {
     return () => {
       setUnmount(true);
     };
-  }, [unmount]);
+  }, [unmount, GoBack, url]);
 
   return (
     <div>
@@ -51,6 +54,10 @@ const HomePage = () => {
       )}
     </div>
   );
+};
+
+HomePage.propTypes = {
+  GoBack: PropTypes.func.isRequired,
 };
 
 export default HomePage;
