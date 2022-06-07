@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import imagesAPI from 'components/services/APIRequests';
+import imagesAPI from 'services/APIRequests';
 
 const Cast = () => {
   const { moviesId } = useParams();
@@ -42,10 +42,10 @@ const Cast = () => {
             return (
               <li key={id}>
                 <img
-                  width={200}
+                  width={250}
                   src={
                     profile_path
-                      ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                      ? `https://image.tmdb.org/t/p/original${profile_path}`
                       : profilePath
                   }
                   alt={name}

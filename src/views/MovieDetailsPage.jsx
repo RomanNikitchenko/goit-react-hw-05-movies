@@ -10,8 +10,8 @@ import {
   Route,
   useRouteMatch,
 } from 'react-router-dom';
-import imagesAPI from 'components/services/APIRequests';
-import styles from 'components/App.module.css';
+import imagesAPI from 'services/APIRequests';
+import styles from 'App.module.css';
 
 const Cast = lazy(() => import('./Cast.jsx' /* webpackChunkName: "Cast" */));
 

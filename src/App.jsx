@@ -1,6 +1,6 @@
 import { useState, lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Navigation from './Navigation/Navigation';
+import Navigation from './components/Navigation/Navigation';
 // import HomePage from './views/HomePage';
 // import MoviesPage from './views/MoviesPage';
 // import MovieDetailsPage from './views/MovieDetailsPage';

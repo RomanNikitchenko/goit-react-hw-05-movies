@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useRouteMatch, useHistory, useLocation } from 'react-router-dom';
-import imagesAPI from 'components/services/APIRequests';
+import imagesAPI from 'services/APIRequests';
 import PropTypes from 'prop-types';
 
 const MoviesPage = ({ GoBack }) => {

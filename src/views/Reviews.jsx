@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import imagesAPI from 'components/services/APIRequests';
+import imagesAPI from 'services/APIRequests';
 
 const Reviews = () => {
   const { moviesId } = useParams();
