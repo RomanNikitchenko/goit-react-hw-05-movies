@@ -1,5 +1,5 @@
 import { useState, lazy, Suspense } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation/Navigation';
 // import HomePage from './views/HomePage';
 // import MoviesPage from './views/MoviesPage';
@@ -18,6 +18,18 @@ const MovieDetailsPage = lazy(() =>
     './views/MovieDetailsPage.jsx' /* webpackChunkName: "MovieDetailsPage" */
   )
 );
+
+function NoMatch() {
+  let location = useLocation();
+
+  return (
+    <div>
+      <h3>
+        No match for <code>{location.pathname}</code>
+      </h3>
+    </div>
+  );
+}
 
 const App = () => {
   const [page, setPage] = useState('/');
@@ -47,7 +59,7 @@ const App = () => {
           </Route>
 
           <Route path="*">
-            <HomePage GoBack={handlChangeUrl} />
+            <NoMatch />
           </Route>
         </Switch>
       </Suspense>
