@@ -46,7 +46,7 @@ const App = () => {
             <MovieDetailsPage page={page} />
           </Route>
 
-          <Route>
+          <Route path="*">
             <HomePage GoBack={handlChangeUrl} />
           </Route>
         </Switch>
